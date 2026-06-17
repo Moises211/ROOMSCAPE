@@ -1,20 +1,20 @@
 //@ts-check
 self.onmessage = function (event) {
     try {
-        const datos = event.data;
-        const total = datos.length;
+        var datos = event.data;
+        var total = datos.length;
 
         if (!datos || total === 0) {
             throw new Error("No se recibieron datos válidos para procesar.");
         }
 
-        let sumTemp = 0, sumHum = 0;
-        let maxTemp = -Infinity, minTemp = Infinity;
-        let maxHum = -Infinity, minHum = Infinity;
+        var sumTemp = 0, sumHum = 0;
+        var maxTemp = -Infinity, minTemp = Infinity;
+        var maxHum = -Infinity, minHum = Infinity;
         
-        const chunkSize = 1000; 
+        var chunkSize = 1000; 
         for (let i = 0; i < total; i++) {
-            const d = datos[i];
+            var d = datos[i];
 
             sumTemp += d.temperatura;
             sumHum += d.humedad;
@@ -25,7 +25,7 @@ self.onmessage = function (event) {
             if (d.humedad < minHum) minHum = d.humedad;
             
             if (i % chunkSize === 0 || i === total - 1) {
-                const porcentaje = Math.round((i / total) * 100);
+                var porcentaje = Math.round((i / total) * 100);
                 self.postMessage({ status: 'progreso', porcentaje: porcentaje });
             }
         }
@@ -45,7 +45,7 @@ self.onmessage = function (event) {
         });
 
     } catch (error) {
-        const message = error instanceof Error ? error.message : String(error);
+        var message = error instanceof Error ? error.message : String(error);
         self.postMessage({ status: 'error', message: message });
     }
 };
