@@ -8,6 +8,10 @@ ROOMSCAPE es una aplicación web interactiva en la que el jugador debe superar c
 
 La humanidad perdió el acceso a información crítica para el funcionamiento de una ciudad inteligente. Para restaurarlo, el jugador debe completar cada prueba en orden; un nivel solo se desbloquea cuando se cumplen todas sus condiciones.
 
+## ¿Cómo funciona?
+
+El recorrido está formado por cinco niveles conectados. Cada uno utiliza información o progreso del nivel anterior y valida sus propios requisitos antes de permitir que el jugador continúe. El navegador conserva los avances necesarios mediante `localStorage`, mientras que las tareas de procesamiento intensivo se ejecutan en Web Workers para mantener la interfaz interactiva.
+
 ## Los cinco desafíos
 
 | Nivel | Desafío | Tecnología principal | Estado en el repositorio |
@@ -18,15 +22,25 @@ La humanidad perdió el acceso a información crítica para el funcionamiento de
 | 4 | El Núcleo de Procesamiento | Web Workers | Implementado |
 | 5 | El Portal Cuántico | Web Workers y exportación JSON | Implementado |
 
-### Nivel 2: El Cartógrafo Perdido
+### 1. El Guardián de la Ubicación
 
-El nivel 2 recupera las coordenadas obtenidas en el nivel anterior y permite:
+El jugador debe autorizar el acceso a su ubicación actual. La aplicación obtiene y muestra la latitud y longitud, además de controlar casos como permisos denegados o ubicación no disponible. Las coordenadas recuperadas se utilizan en el siguiente desafío.
 
-- Dibujar un mapa simplificado sobre un elemento `<canvas>`.
-- Representar círculos, líneas y rectángulos.
-- Marcar visualmente la posición del jugador.
-- Validar que el mapa y el marcador existan antes de completar el nivel.
-- Guardar el progreso en `localStorage` para desbloquear el siguiente desafío.
+### 2. El Cartógrafo Perdido
+
+Con las coordenadas del nivel anterior se reconstruye un mapa simplificado mediante Canvas. El jugador debe dibujar elementos cartográficos básicos —círculos, líneas y rectángulos— y marcar su posición antes de poder avanzar.
+
+### 3. La Evidencia del Explorador
+
+El navegador solicita acceso a la cámara y muestra video en tiempo real. El jugador debe capturar al menos una fotografía, visualizarla y conservarla en `localStorage`. También se manejan errores de permisos o ausencia de cámara.
+
+### 4. El Núcleo de Procesamiento
+
+La aplicación genera 20,000 lecturas simuladas de temperatura y humedad. Un Web Worker calcula promedios, máximos y mínimos sin bloquear la interfaz, mientras una barra informa el progreso del procesamiento.
+
+### 5. El Portal Cuántico
+
+El desafío final procesa 250,000 registros simulados de temperatura, humedad y presión. El Worker descarta valores negativos, calcula estadísticas generales y obtiene los diez valores más altos de temperatura y presión. Los resultados pueden visualizarse y descargarse como un archivo JSON.
 
 ## Tecnologías
 
@@ -58,22 +72,11 @@ También puedes utilizar Python desde la raíz del proyecto:
 python -m http.server 8000
 ```
 
-Después abre el nivel deseado, por ejemplo `http://localhost:8000/HTML/nivel2.html`.
+Después abre `http://localhost:8000` en el navegador. Durante el desarrollo también es posible acceder directamente a los archivos dentro de `HTML/` para revisar cada desafío por separado.
 
-## Probar el nivel 2 de forma independiente
+## Criterios de finalización
 
-El flujo normal espera que el nivel 1 guarde la ubicación. Para probar el nivel 2 mientras se completa la integración, utiliza coordenadas de prueba en la URL:
-
-```text
-http://localhost:8000/HTML/nivel2.html?lat=13.692940&lng=-89.218190
-```
-
-Luego:
-
-1. Selecciona **Dibujar mapa**.
-2. Selecciona **Marcar mi posición**.
-3. Verifica la lista de requisitos.
-4. Selecciona **Completar nivel 2**.
+Un nivel se considera completado únicamente cuando el jugador satisface todos sus requisitos. La aplicación debe impedir el acceso anticipado a desafíos superiores y conservar disponibles todos los niveles para su revisión. Durante el trabajo de los Web Workers, la interfaz debe continuar respondiendo a las interacciones del usuario.
 
 ## Estructura principal
 
