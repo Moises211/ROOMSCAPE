@@ -1,16 +1,32 @@
-const boton = document.getElementById("btnUbicacion");
+(function () {
+    function inicializarNivel1() {
+        const boton = document.getElementById("btnUbicacion");
+        const siguiente = document.getElementById("btnSiguiente");
 
-const siguiente = document.getElementById( "btnSiguiente" );
+        if (!boton || !siguiente) {
+            window.setTimeout(inicializarNivel1, 20);
+            return;
+        }
 
-boton.addEventListener( "click", obtenerUbicacion );
-
-function obtenerUbicacion(){
-    if(!navigator.geolocation){
-    mostrarMensaje( "Tu navegador no soporta geolocalización", "danger" );
-    return;
+        boton.addEventListener("click", obtenerUbicacion);
+        siguiente.addEventListener("click", () => {
+            if (window.AppNavigation && typeof window.AppNavigation.navigate === 'function') {
+                window.AppNavigation.navigate('nivel2');
+            } else {
+                window.location.href = 'nivel2.html';
+            }
+        });
     }
-    navigator.geolocation.getCurrentPosition( ubicacionCorrecta, errorUbicacion );
-}
+
+    inicializarNivel1();
+
+    function obtenerUbicacion(){
+        if(!navigator.geolocation){
+            mostrarMensaje( "Tu navegador no soporta geolocalización", "danger" );
+            return;
+        }
+        navigator.geolocation.getCurrentPosition( ubicacionCorrecta, errorUbicacion );
+    }
 
 
 function ubicacionCorrecta(posicion){
@@ -23,9 +39,12 @@ function ubicacionCorrecta(posicion){
 
     //Guardar latitud y longitud en localStorage para nivel 2 
     localStorage.setItem("latitud" , lat);
-    localStorage.setItem("longitud" , lon)
-    siguiente.disabled=false;
+    localStorage.setItem("longitud" , lon);
 
+    const siguiente = document.getElementById("btnSiguiente");
+    if (siguiente) {
+        siguiente.disabled = false;
+    }
 }
 
 
@@ -46,11 +65,9 @@ function errorUbicacion(error){
 
 
 function mostrarMensaje(texto,tipo){
-
     let mensaje = document.getElementById( "mensaje" );
+    if (!mensaje) return;
     mensaje.className= "alert alert-"+tipo;
     mensaje.innerHTML=texto;
-
 }
-//conectar con boton nivel 2
-siguiente.addEventListener( "click", ()=>{ window.location.href = "nivel2.html";});
+})();

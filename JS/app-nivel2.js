@@ -249,7 +249,11 @@
         }
         if (mensajeProgreso) mensajeProgreso.textContent = 'Acceso al nivel 3 desbloqueado.';
         window.setTimeout(function () {
+            if (window.AppNavigation && typeof window.AppNavigation.navigate === 'function') {
+            window.AppNavigation.navigate('nivel3');
+        } else {
             window.location.href = 'nivel3.html';
+        }
         }, 900);
     }
 

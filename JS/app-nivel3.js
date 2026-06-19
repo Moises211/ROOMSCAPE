@@ -255,7 +255,11 @@ btnCompletar.addEventListener(
                 .forEach(track => track.stop());
         }
 
-        window.location.href = "nivel4.html";
+        if (window.AppNavigation && typeof window.AppNavigation.navigate === 'function') {
+            window.AppNavigation.navigate('nivel4');
+        } else {
+            window.location.href = 'nivel4.html';
+        }
     }
 );
 

@@ -39,10 +39,24 @@ workerN5.onmessage = function(event) {
                 <p><strong>Promedio Humedad:</strong> ${resultados.promedioHumedad}%</p>
                 <p><strong>Promedio Presión:</strong> ${resultados.promedioPresion} hPa</p>
                 <hr>
-                <h6>Top 10 Temperaturas Altas (°C):</h6>
-                <p class="text-muted">${resultados.topTemperaturas.map((/** @type {number} */ n) => n.toFixed(2)).join(' | ')}</p>
-                <h6>Top 10 Presiones Altas (hPa):</h6>
-                <p class="text-muted">${resultados.topPresiones.map((/** @type {number} */ n) => n.toFixed(1)).join(' | ')}</p>
+                <h6>Top 10 Temperaturas y Presiones Altas</h6>
+                <div class="table-responsive">
+                    <table class="table table-sm table-striped text-white mb-0">
+                        <thead>
+                            <tr>
+                                <th>Temperatura (°C)</th>
+                                <th>Presión (hPa)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${Array.from({ length: Math.max(resultados.topTemperaturas.length, resultados.topPresiones.length) }).map((_, index) => {
+                                const temp = resultados.topTemperaturas[index] !== undefined ? resultados.topTemperaturas[index].toFixed(2) : '-';
+                                const pres = resultados.topPresiones[index] !== undefined ? resultados.topPresiones[index].toFixed(1) : '-';
+                                return `<tr><td>${temp}</td><td>${pres}</td></tr>`;
+                            }).join('')}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         `;
         if (resultadosN5) resultadosN5.classList.remove('d-none');
