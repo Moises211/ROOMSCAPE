@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Nivel 1: El guardián de la ubicación</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-dark text-white">
+    <div class="container mt-5">
+        <div class="card text-dark">
+            <div class="card-header">
+                <h3>
+                    El Guardián de la Ubicación - Nivel 1
+                </h3>
+            </div>
+            <div class="card-body">
+                <p>
+                    Obtén tu ubicación para desbloquear el siguiente nivel.
+                </p>
+                <button id="btnUbicacion" class="btn btn-primary">
+                    Obtener ubicación
+                </button>
+                <hr>
+                <p>
+                    Latitud:
+                    <span id="latitud">
+                        ---
+                    </span>
+                </p>
+                <p>
+                    Longitud:
+                    <span id="longitud">
+                        ---
+                    </span>
+                </p>
+                <div id="mensaje" class="alert alert-info">
+                    Esperando ubicación...
+                </div>
+
+                <button id="btnSiguiente" class="btn btn-success" disabled>
+                    Ir al Nivel 2
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../JS/app-nivel1.js"></script>
+
+</body>
+
+</html>
