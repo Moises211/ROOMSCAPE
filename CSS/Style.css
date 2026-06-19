@@ -88,8 +88,187 @@
 }
 
 @media (max-width: 575.98px) {
-    .nivel2-header { align-items: flex-start; }
-    .nivel2-header .lead { font-size: 1rem; }
-    .nivel2-badge { padding: .6rem .75rem; }
-    .nivel2-panel { padding: 1rem; }
+    .nivel2-header {
+        align-items: flex-start;
+    }
+
+    .nivel2-header .lead {
+        font-size: 1rem;
+    }
+
+    .nivel2-badge {
+        padding: .6rem .75rem;
+    }
+
+    .nivel2-panel {
+        padding: 1rem;
+    }
+}
+
+/* ==========================================
+   NIVEL 3
+========================================== */
+
+.nivel3-body {
+    min-height: 100vh;
+    color: #edf8f5;
+
+    background:
+        radial-gradient(circle at 15% 15%, rgba(55, 126, 117, .24), transparent 30rem),
+        linear-gradient(145deg, #07191d 0%, #0b252a 58%, #071418 100%);
+}
+
+.nivel3-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.nivel3-kicker,
+.nivel3-label {
+    color: #e7c971;
+    font-size: .78rem;
+    font-weight: 800;
+    letter-spacing: .16em;
+}
+
+.nivel3-badge {
+    flex: 0 0 auto;
+
+    padding: .85rem 1rem;
+
+    border: 1px solid rgba(231, 201, 113, .55);
+
+    border-radius: 999px;
+
+    color: #e7c971;
+
+    font-weight: 800;
+
+    letter-spacing: .12em;
+}
+
+.nivel3-panel {
+
+    padding: 1.35rem;
+
+    border: 1px solid rgba(177, 223, 211, .15);
+
+    border-radius: 1.25rem;
+
+    background: rgba(8, 28, 32, .76);
+
+    box-shadow: 0 1.25rem 3rem rgba(0, 0, 0, .22);
+
+    backdrop-filter: blur(9px);
+}
+
+.nivel3-video-wrap {
+
+    overflow: hidden;
+
+    border-radius: .85rem;
+
+    border: 1px solid rgba(231, 201, 113, .32);
+
+    background: #091a20;
+}
+
+#video {
+
+    width: 100%;
+
+    min-height: 420px;
+
+    display: block;
+
+    object-fit: cover;
+
+    background: black;
+}
+
+.nivel3-foto-wrap {
+
+    min-height: 320px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    border-radius: .85rem;
+
+    border: 1px solid rgba(231, 201, 113, .32);
+
+    background: #091a20;
+
+    overflow: hidden;
+}
+
+#fotoCapturada {
+
+    max-height: 500px;
+
+    width: auto;
+    
+    max-width: 100%;
+}
+
+.nivel3-placeholder {
+
+    color: #9db5b3;
+
+    text-align: center;
+
+    padding: 2rem;
+}
+
+.nivel3-checklist li {
+
+    display: flex;
+
+    gap: .7rem;
+
+    align-items: center;
+
+    padding: .55rem 0;
+
+    color: #9db5b3;
+
+    border-bottom: 1px solid rgba(255, 255, 255, .07);
+}
+
+.nivel3-checklist li span {
+
+    color: #78918e;
+
+    font-size: 1.15rem;
+
+    font-weight: 800;
+}
+
+.nivel3-checklist li.completado {
+
+    color: #dcf8e8;
+}
+
+.nivel3-checklist li.completado span {
+
+    color: #55d98b;
+}
+
+.nivel3-body .btn-warning {
+
+    color: #162523;
+
+    background-color: #e7c971;
+
+    border-color: #e7c971;
+}
+
+.nivel3-body .text-secondary {
+
+    color: #9db5b3 !important;
 }
